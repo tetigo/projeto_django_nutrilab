@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'plataforma/css/css.css' %}">
+    <link rel="stylesheet" href="{% static 'plataforma/css/plano_alimentar.css' %}">
+{% endblock 'head' %}
+
+{% block 'body' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <a href="{% url 'paciente_url' %}" class="link-lateral">
+                    <div class="card-lateral">
+                        <img src="{% static 'plataforma/img/paciente.png' %}">
+                        <br>
+                        <br>
+                  
+                        <h3>Gerenciar Pacientes</h3>
+                    </div>
+                </a>
+                  
+                <a href="{% url 'dados_pacientes_listar_url' %}" class="link-lateral">
+                    <div class="card-lateral">
+                        <img src="{% static 'plataforma/img/dados_paciente.png' %}">
+                        <br>
+                        <br>
+                  
+                        <h3>Dados do Pacientes</h3>
+                    </div>
+                </a>
+                  
+                <a href="{% url 'plano_alimentar_listar_url' %}" class="link-lateral">
+                    <div class="card-lateral" id="ult-lateral">
+                        <img src="{% static 'plataforma/img/plano_alimentar.png' %}">
+                        <br>
+                        <br>
+                  
+                        <h3>Plano alimentar</h3>
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="col-md-9">
+                {% block 'plataforma' %}
+
+
+                {% endblock %}
+            </div>
+
+        </div>
+    </div>
+{% endblock%}

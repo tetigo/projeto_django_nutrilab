@@ -1,0 +1,18 @@
+# Django secret key
+SECRET_KEY=
+
+# PDF info
+path_wkhtmltopdf=C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe
+path_to_save_pdf=C:/Users/Tiago/python_projects/nutrilab/pdf
+
+# Email
+EMAIL_USE_TLS=
+EMAIL_HOST=
+EMAIL_PORT=
+EMAIL_HOST_USER=
+EMAIL_HOST_PASSWORD=
+EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
+EMAIL_BASE=http://localhost:8000
+
+
+
