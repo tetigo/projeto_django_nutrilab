@@ -51,10 +51,10 @@ def dados_pacientes_listar(req):
     if req.method == 'GET':
         try:
             pacientes = Paciente.objects.filter(nutri = req.user)
-            return render(req, 'dados_pacientes_listar.html', context={'pacientes':pacientes})
+            return render(req, 'dados_pacientes_listar.html', context={'pacientes':pacientes, 'nutricionista': req.user.username})
         except Exception as e:
             messages.add_message(req, constants.ERROR, f'Something went wrong - {e}')
-            return render(req, 'dados_pacientes_listar.html', context={'pacientes':pacientes})
+            return render(req, 'dados_pacientes_listar.html', context={'pacientes':pacientes, 'nutricionista': req.user.username})
 
 
 # def getKey(self):
@@ -69,11 +69,11 @@ def dados_paciente(req, id):
             paciente = Paciente.objects.get(id=id, nutri=req.user)
             dados = DadosPaciente.objects.filter(paciente=paciente)
             dados=sorted(dados, key=lambda x: x.data, reverse=True)
-            return render(req, 'dados_paciente.html', context={'paciente':paciente, 'dados':dados})
+            return render(req, 'dados_paciente.html', context={'paciente':paciente, 'dados':dados, 'nutricionista': req.user.username})
         except Exception as e:
             messages.add_message(req, constants.ERROR, f'Something went wrong - {e}')
             pacientes = Paciente.objects.filter(nutri = req.user)
-            return render(req, 'dados_pacientes_listar.html', context={'pacientes':pacientes})
+            return render(req, 'dados_pacientes_listar.html', context={'pacientes':pacientes, 'nutricionista': req.user.username})
     if req.method == 'POST':
         try:
             peso = req.POST.get('peso')    
@@ -144,7 +144,7 @@ def plano_alimentar_listar(req):
     if req.method == 'GET':
         try:
             pacientes = Paciente.objects.filter(nutri=req.user)
-            return render(req, 'plano_alimentar_listar.html', context={'pacientes':pacientes})
+            return render(req, 'plano_alimentar_listar.html', context={'pacientes':pacientes, 'nutricionista': req.user.username})
         except Exception as e:
             messages.add_message(req, constants.ERROR, f'Something went wrong - {e}')
             return redirect('/auth/login')
@@ -159,7 +159,7 @@ def plano_alimentar(req, id):
             paciente = Paciente.objects.get(id=id, nutri=req.user)
             refeicoes = Refeicao.objects.filter(paciente=paciente).order_by('horario')
             opcoes = Opcao.objects.filter(refeicao__in=refeicoes)
-            return render(req, 'plano_alimentar.html', context={'paciente':paciente, 'refeicoes': refeicoes, 'opcoes': opcoes})
+            return render(req, 'plano_alimentar.html', context={'paciente':paciente, 'refeicoes': refeicoes, 'opcoes': opcoes, 'nutricionista': req.user.username})
         except Exception as e:
             messages.add_message(req, constants.ERROR, f'Something went wrong - {e}')
             return redirect('/plano_alimentar_listar/')
@@ -226,7 +226,7 @@ def pdf(req, id):
         refeicoes = Refeicao.objects.filter(paciente=paciente).order_by('horario')
         opcoes = Opcao.objects.filter(refeicao__in=refeicoes)
 
-        teste = render_to_string(request=req, template_name='plano_alimentar.html', context={'paciente':paciente, 'refeicoes': refeicoes, 'opcoes': opcoes})
+        teste = render_to_string(request=req, template_name='plano_alimentar.html', context={'paciente':paciente, 'refeicoes': refeicoes, 'opcoes': opcoes, 'nutricionista': req.user.username})
         teste = teste.replace('src="/media/', f'src="{settings.MEDIA_ROOT}/')
         teste = teste.replace('src="/static/plataforma/',f'src="{settings.STATICFILES_DIRS[0]}/plataforma/')
 
