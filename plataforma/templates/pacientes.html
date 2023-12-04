@@ -1,4 +1,12 @@
-{% extends 'base_plataforma.html' %} {% load static %} {% block 'plataforma' %}
+{% extends 'base_plataforma.html' %} 
+
+{% load static %} 
+
+{% block 'user' %}
+{{nutricionista}}
+{% endblock %}
+
+{% block 'plataforma' %}
 <br />
 {% if messages %} {% for msg in messages %}
 <div class="alert {{msg.tags}}" role="alert">

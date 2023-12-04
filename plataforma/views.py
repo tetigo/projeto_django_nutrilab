@@ -14,7 +14,7 @@ from django.http import JsonResponse
 def paciente(req):
     if req.method=='GET':
         pacientes = Paciente.objects.filter(nutri=req.user)
-        return render(req, 'pacientes.html', context={'pacientes':pacientes})
+        return render(req, 'pacientes.html', context={'pacientes':pacientes, 'nutricionista': req.user.username})
     if req.method=='POST':
         nome = req.POST.get('nome')
         sexo = req.POST.get('sexo')

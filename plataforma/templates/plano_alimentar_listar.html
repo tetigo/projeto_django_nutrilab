@@ -2,6 +2,11 @@
 {% extends 'base_plataforma.html' %}
 {% load static %}
 
+{% block 'user' %}
+{{nutricionista}}
+{% endblock %}
+
+
 {% block 'plataforma' %}
 
     {% if messages %}
